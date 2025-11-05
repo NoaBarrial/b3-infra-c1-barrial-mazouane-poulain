@@ -33,6 +33,7 @@
       {"name": "riz", "qty": 500, "unit": "g"}
     ]
   },
+
   {
     "id": "r4",
     "name": "Saumon fumé",
@@ -42,6 +43,28 @@
     "ingredients": [
       {"name": "saumon", "qty": 1, "unit": "kg"},
       {"name": "haricots verts", "qty": 200, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r5",
+    "name": "Cabillau",
+    "tags": ["fish"],
+    "time_min": 10,
+    "budget_eur": 2.0,
+    "ingredients": [
+      {"name": "cabillau", "qty": 1, "unit": "kg"},
+      {"name": "brocolis", "qty": 100, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r6",
+    "name": "Blanc de poulet",
+    "tags": ["meat"],
+    "time_min": 30,
+    "budget_eur": 1.0,
+    "ingredients": [
+      {"name": "poulet", "qty": 1, "unit": "kg"},
+      {"name": "salade", "qty": 500, "unit": "g"}
     ]
   }
 ]

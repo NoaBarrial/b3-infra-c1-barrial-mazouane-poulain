@@ -73,6 +73,48 @@
       ]
     },
     {
+      "id": "r5",
+      "name": "Cabillau",
+      "tags": [
+        "fish"
+      ],
+      "time_min": 10,
+      "budget_eur": 2.0,
+      "ingredients": [
+        {
+          "name": "cabillau",
+          "qty": 1,
+          "unit": "kg"
+        },
+        {
+          "name": "brocolis",
+          "qty": 100,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "r6",
+      "name": "Blanc de poulet",
+      "tags": [
+        "meat"
+      ],
+      "time_min": 30,
+      "budget_eur": 1.0,
+      "ingredients": [
+        {
+          "name": "poulet",
+          "qty": 1,
+          "unit": "kg"
+        },
+        {
+          "name": "salade",
+          "qty": 500,
+          "unit": "g"
+        }
+      ]
+    },
+    {
       "id": "r1",
       "name": "Pâtes à l'ail et huile d'olive",
       "tags": [
@@ -101,45 +143,30 @@
       ]
     },
     {
-      "id": "r2",
-      "name": "Omelette fromage",
+      "id": "r1",
+      "name": "Pâtes à l'ail et huile d'olive",
       "tags": [
         "vege",
-        "rapide"
+        "rapide",
+        "budget"
       ],
-      "time_min": 10,
-      "budget_eur": 1.8,
+      "time_min": 15,
+      "budget_eur": 2.0,
       "ingredients": [
         {
-          "name": "oeufs",
-          "qty": 3,
-          "unit": "piece"
-        },
-        {
-          "name": "fromage râpé",
-          "qty": 30,
-          "unit": "g"
-        }
-      ]
-    },
-    {
-      "id": "r4",
-      "name": "Saumon fumé",
-      "tags": [
-        "fish"
-      ],
-      "time_min": 20,
-      "budget_eur": 6.0,
-      "ingredients": [
-        {
-          "name": "saumon",
-          "qty": 1,
-          "unit": "kg"
-        },
-        {
-          "name": "haricots verts",
+          "name": "pâtes",
           "qty": 200,
           "unit": "g"
+        },
+        {
+          "name": "ail",
+          "qty": 2,
+          "unit": "gousse"
+        },
+        {
+          "name": "huile d'olive",
+          "qty": 2,
+          "unit": "cs"
         }
       ]
     }
@@ -147,37 +174,57 @@
   "shopping_list": [
     {
       "name": "ail",
-      "qty": 4.0,
+      "qty": 6.0,
       "unit": "gousse"
     },
     {
+      "name": "brocolis",
+      "qty": 100.0,
+      "unit": "g"
+    },
+    {
+      "name": "cabillau",
+      "qty": 1.0,
+      "unit": "kg"
+    },
+    {
       "name": "fromage râpé",
-      "qty": 60.0,
+      "qty": 30.0,
       "unit": "g"
     },
     {
       "name": "haricots verts",
-      "qty": 400.0,
+      "qty": 200.0,
       "unit": "g"
     },
     {
       "name": "huile d'olive",
-      "qty": 4.0,
+      "qty": 6.0,
       "unit": "cs"
     },
     {
       "name": "oeufs",
-      "qty": 6.0,
+      "qty": 3.0,
       "unit": "piece"
     },
     {
+      "name": "poulet",
+      "qty": 1.0,
+      "unit": "kg"
+    },
+    {
       "name": "pâtes",
-      "qty": 400.0,
+      "qty": 600.0,
+      "unit": "g"
+    },
+    {
+      "name": "salade",
+      "qty": 500.0,
       "unit": "g"
     },
     {
       "name": "saumon",
-      "qty": 2.0,
+      "qty": 1.0,
       "unit": "kg"
     }
   ]

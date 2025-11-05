@@ -11,6 +11,8 @@ def is_fish(recipe: Dict[str, Any]) -> bool:
 def is_meat(recipe: Dict[str, Any]) -> bool:
     return "tags" in recipe and any(t.lower() == "meat" for t in recipe["tags"])
 
+def is_budget(recipe: Dict[str, Any]) -> bool:
+    return "budget_eur" in recipe 
 
 
 def fits_time(recipe: Dict[str, Any], max_time: int | None) -> bool:
@@ -32,7 +34,7 @@ def select_menu(
     max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
-    max_weekly_budget : int = 50,
+    max_weekly_budget : int = 10,
     tolerance: float = 0.2,
     seed: int | None = 42,
 ) -> List[Dict[str, Any]]:
@@ -64,8 +66,9 @@ def select_menu(
             break
         if avg_budget is not None and not within_budget_avg(cand, avg_budget, tolerance):
             continue
-        #if max_weekly_budget < 50:
-
+        total_weekly_budget = sum(float(r.get("budget_eur", 0.0)) for r in cand)
+        if total_weekly_budget >= max_weekly_budget:
+            break
         best = cand
         break
     if not best:
