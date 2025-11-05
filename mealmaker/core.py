@@ -18,6 +18,32 @@ def fits_time(recipe: Dict[str, Any], max_time: int | None) -> bool:
         return True
     return int(recipe.get("time_min", 9999)) <= max_time
 
+def exclude_ingredients_filter(recipes: List[Dict[str, Any]], excluded_ingredients: List[str]) -> List[Dict[str, Any]]:
+    """
+    Filtre les recettes contenant des ingrédients exclus (allergènes, etc.).
+    Chaque recette doit avoir un champ 'ingredients' = liste de dicts 
+    avec au moins une clé 'name'.
+    """
+    if not excluded_ingredients:
+        return recipes
+
+    excluded_lower = [x.strip().lower() for x in excluded_ingredients]
+    filtered = []
+
+    for recipe in recipes:
+        ingredients = recipe.get("ingredients", [])
+        # On extrait les noms d’ingrédients
+        names_lower = [
+            i["name"].lower()
+            for i in ingredients
+            if isinstance(i, dict) and "name" in i
+        ]
+        # Si aucun ingrédient interdit n’est présent → on garde la recette
+        if not any(exc in names_lower for exc in excluded_lower):
+            filtered.append(recipe)
+
+    return filtered
+
 def within_budget_avg(selected: List[Dict[str, Any]], avg_target: float, tolerance: float = 0.2) -> bool:
     if not selected:
         return True
@@ -41,6 +67,7 @@ def select_menu(
     - Tire au sort jusqu'à avoir 'days' recettes.
     - Vérifie min_vege, min_fish, max_meat et budget moyen (si fourni). Réessaie quelques fois.
     """
+    
     pool = [r for r in recipes if fits_time(r, max_time)]
     if seed is not None:
         random.seed(seed)
