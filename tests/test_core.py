@@ -1,19 +1,32 @@
-from mealmaker.core import is_vege, fits_time, within_budget_avg, select_menu, consolidate_shopping_list
+from mealmaker.core import is_vege, is_fish, is_meat, fits_time, within_budget_avg, select_menu, consolidate_shopping_list
 
 def sample_recipes():
     return [
         {"id": "r1", "name": "A", "tags": ["vege"], "time_min": 15, "budget_eur": 2.0,
          "ingredients": [{"name": "pâtes", "qty": 200, "unit": "g"}]},
-        {"id": "r2", "name": "B", "tags": ["viande"], "time_min": 30, "budget_eur": 3.0,
+        {"id": "r2", "name": "B", "tags": ["meat"], "time_min": 30, "budget_eur": 3.0,
          "ingredients": [{"name": "riz", "qty": 150, "unit": "g"}]},
         {"id": "r3", "name": "C", "tags": ["vege"], "time_min": 10, "budget_eur": 1.5,
          "ingredients": [{"name": "pâtes", "qty": 100, "unit": "g"}]},
+         {"id": "r4", "name": "D", "tags": ["fish"], "time_min": 20, "budget_eur": 6.0,
+         "ingredients": [{"name": "haricots verts", "qty": 200, "unit": "g"}]},
     ]
 
 def test_is_vege():
-    r = {"tags": ["VeGe"]}
+    r = {"tags": ["vege"]}
     assert is_vege(r) is True
-    assert is_vege({"tags": ["viande"]}) is False
+    assert is_vege({"tags": ["meat"]}) is False
+
+def test_is_fish():
+    r = {"tags": ["fish"]}
+    assert is_fish(r) is True
+    assert is_fish({"tags": ["meat"]}) is False
+
+def test_is_meat():
+    r = {"tags": ["meat"]}
+    assert is_meat(r) is True
+    assert is_meat({"tags": ["vege"]}) is False
+
 
 def test_fits_time():
     assert fits_time({"time_min": 20}, 30) is True
