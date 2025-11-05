@@ -127,7 +127,7 @@ def plan_menu(
 ) -> Dict[str, Any]:
     menu = select_menu(
         recipes, days=days, min_vege=min_vege, min_fish=min_fish, max_meat=max_meat, max_time=max_time,
-        avg_budget=avg_budget, tolerance=tolerance, seed=seed
+        avg_budget=avg_budget, tolerance=tolerance, seed=seed, exclude_ingredients=exclude_ingredients,
     )
     shopping = consolidate_shopping_list(menu)
     return {"days": days, "menu": menu, "shopping_list": shopping}

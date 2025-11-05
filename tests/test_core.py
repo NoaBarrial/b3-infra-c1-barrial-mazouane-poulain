@@ -8,6 +8,7 @@ def sample_recipes():
          "ingredients": [{"name": "riz", "qty": 150, "unit": "g"}]},
         {"id": "r3", "name": "C", "tags": ["vege"], "time_min": 10, "budget_eur": 1.5,
          "ingredients": [{"name": "pâtes", "qty": 100, "unit": "g"}]},
+         
     ]
 
 def test_is_vege():

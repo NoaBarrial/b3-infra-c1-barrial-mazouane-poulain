@@ -15,7 +15,7 @@ def main():
     p.add_argument("--seed", type=int, default=42, help="Graine aléatoire pour reproductibilité")
     p.add_argument("--output", default=None, help="Chemin pour sauvegarder le JSON généré")
 
-    # ✅ Nouvel argument ajouté ici
+    
     p.add_argument(
         "--exclude-ingredients",
         nargs="+",
