@@ -68,8 +68,8 @@ def select_menu(
     - Tire au sort jusqu'à avoir 'days' recettes.
     - Vérifie min_vege, min_fish, max_meat et budget moyen (si fourni). Réessaie quelques fois.
     """
-    
-    pool = [r for r in recipes if fits_time(r, max_time)]
+    pool = exclude_ingredients_filter(recipes, exclude_ingredients or [])
+    pool = [r for r in pool if fits_time(r, max_time)]
     if seed is not None:
         random.seed(seed)
     attempts = 200
@@ -123,6 +123,7 @@ def plan_menu(
     avg_budget: float | None = None,
     tolerance: float = 0.2,
     seed: int | None = 42,
+    exclude_ingredients: List[str] | None = None,
 ) -> Dict[str, Any]:
     menu = select_menu(
         recipes, days=days, min_vege=min_vege, min_fish=min_fish, max_meat=max_meat, max_time=max_time,
