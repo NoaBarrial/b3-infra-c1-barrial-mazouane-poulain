@@ -60,6 +60,7 @@ def select_menu(
     avg_budget: float | None = None,
     tolerance: float = 0.2,
     seed: int | None = 42,
+    exclude_ingredients: List[str] | None = None,
 ) -> List[Dict[str, Any]]:
     """
     Sélection simple et déterministe (via seed) :
