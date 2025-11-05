@@ -1,4 +1,4 @@
-from mealmaker.core import is_vege, fits_time, within_budget_avg, select_menu, consolidate_shopping_list
+from mealmaker.core import is_vege, fits_time, within_budget_avg, select_menu, consolidate_shopping_list, exclude_ingredients_filter
 
 def sample_recipes():
     return [
@@ -43,3 +43,16 @@ def test_consolidate_shopping_list():
     lookup = { (i["name"], i["unit"]): i["qty"] for i in items }
     assert lookup.get(("pâtes", "g")) == 200
     assert lookup.get(("riz", "g")) == 150
+
+def test_exclude_ingredients_filter():
+    recs = sample_recipes()
+    filtered = exclude_ingredients_filter(recs, ["oeuf"])
+    # On s'assure qu'aucune recette contenant "oeuf" n'est présente
+    assert all(
+        all("oeuf" not in ing["name"].lower() for ing in r["ingredients"])
+        for r in filtered
+    ), "Les recettes contenant 'oeuf' ne devraient pas être incluses"
+    # Et on vérifie qu'il reste bien les autres recettes
+    assert any(r["name"] == "A" for r in filtered)
+    assert any(r["name"] == "B" for r in filtered)
+    assert not any(r["name"] == "C" for r in filtered)
