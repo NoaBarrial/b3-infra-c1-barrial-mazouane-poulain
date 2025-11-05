@@ -8,7 +8,7 @@ def main():
     p.add_argument("--days", type=int, default=7)
     p.add_argument("--min-vege", type=int, default=2)
     p.add_argument("--min-fish", type=int, default=2)
-    p.add_argument("--min-meat", type=int, default=3)
+    p.add_argument("--max-meat", type=int, default=3)
     p.add_argument("--max-time", type=int, default=None)
     p.add_argument("--avg-budget", type=float, default=None)
     p.add_argument("--tolerance", type=float, default=0.2)
@@ -23,7 +23,7 @@ def main():
         days=args.days,
         min_vege=args.min_vege,
         min_fish=args.min_fish,
-        min_meat=args.min_meat,
+        max_meat=args.min_meat,
         max_time=args.max_time,
         avg_budget=args.avg_budget,
         tolerance=args.tolerance,
