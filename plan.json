@@ -30,23 +30,43 @@
       ]
     },
     {
-      "id": "r2",
-      "name": "Omelette fromage",
+      "id": "r3",
+      "name": "Poulet rôti",
       "tags": [
-        "vege",
-        "rapide"
+        "viande"
       ],
-      "time_min": 10,
-      "budget_eur": 1.8,
+      "time_min": 60,
+      "budget_eur": 4.0,
       "ingredients": [
         {
-          "name": "oeufs",
-          "qty": 3,
-          "unit": "piece"
+          "name": "poulet",
+          "qty": 1,
+          "unit": "kg"
         },
         {
-          "name": "fromage râpé",
-          "qty": 30,
+          "name": "pommes de terre",
+          "qty": 500,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Saumon fumé",
+      "tags": [
+        "fish"
+      ],
+      "time_min": 20,
+      "budget_eur": 6.0,
+      "ingredients": [
+        {
+          "name": "saumon",
+          "qty": 1,
+          "unit": "kg"
+        },
+        {
+          "name": "haricots verts",
+          "qty": 300,
           "unit": "g"
         }
       ]
@@ -154,14 +174,30 @@
       "budget_eur": 2.0,
       "ingredients": [
         {
-          "name": "pâtes",
-          "qty": 200,
-          "unit": "g"
+          "name": "oeufs",
+          "qty": 3,
+          "unit": "piece"
         },
         {
-          "name": "ail",
-          "qty": 2,
-          "unit": "gousse"
+          "name": "fromage râpé",
+          "qty": 30,
+          "unit": "g"
+        }
+      ]
+    },
+    {
+      "id": "r4",
+      "name": "Saumon fumé",
+      "tags": [
+        "fish"
+      ],
+      "time_min": 20,
+      "budget_eur": 6.0,
+      "ingredients": [
+        {
+          "name": "saumon",
+          "qty": 1,
+          "unit": "kg"
         },
         {
           "name": "huile d'olive",
@@ -178,23 +214,13 @@
       "unit": "gousse"
     },
     {
-      "name": "brocolis",
-      "qty": 100.0,
-      "unit": "g"
-    },
-    {
-      "name": "cabillau",
-      "qty": 1.0,
-      "unit": "kg"
-    },
-    {
       "name": "fromage râpé",
-      "qty": 30.0,
+      "qty": 60.0,
       "unit": "g"
     },
     {
       "name": "haricots verts",
-      "qty": 200.0,
+      "qty": 600.0,
       "unit": "g"
     },
     {
@@ -204,7 +230,7 @@
     },
     {
       "name": "oeufs",
-      "qty": 3.0,
+      "qty": 6.0,
       "unit": "piece"
     },
     {
@@ -214,17 +240,12 @@
     },
     {
       "name": "pâtes",
-      "qty": 600.0,
-      "unit": "g"
-    },
-    {
-      "name": "salade",
-      "qty": 500.0,
+      "qty": 400.0,
       "unit": "g"
     },
     {
       "name": "saumon",
-      "qty": 1.0,
+      "qty": 2.0,
       "unit": "kg"
     }
   ]
