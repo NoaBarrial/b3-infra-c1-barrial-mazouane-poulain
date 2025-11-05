@@ -52,6 +52,27 @@
       ]
     },
     {
+      "id": "r4",
+      "name": "Saumon fumé",
+      "tags": [
+        "fish"
+      ],
+      "time_min": 20,
+      "budget_eur": 6.0,
+      "ingredients": [
+        {
+          "name": "saumon",
+          "qty": 1,
+          "unit": "kg"
+        },
+        {
+          "name": "haricots verts",
+          "qty": 300,
+          "unit": "g"
+        }
+      ]
+    },
+    {
       "id": "r1",
       "name": "Pâtes à l'ail et huile d'olive",
       "tags": [
@@ -100,6 +121,27 @@
           "unit": "g"
         }
       ]
+    },
+    {
+      "id": "r4",
+      "name": "Saumon fumé",
+      "tags": [
+        "fish"
+      ],
+      "time_min": 20,
+      "budget_eur": 6.0,
+      "ingredients": [
+        {
+          "name": "saumon",
+          "qty": 1,
+          "unit": "kg"
+        },
+        {
+          "name": "haricots verts",
+          "qty": 300,
+          "unit": "g"
+        }
+      ]
     }
   ],
   "shopping_list": [
@@ -111,6 +153,11 @@
     {
       "name": "fromage râpé",
       "qty": 60.0,
+      "unit": "g"
+    },
+    {
+      "name": "haricots verts",
+      "qty": 600.0,
       "unit": "g"
     },
     {
@@ -127,6 +174,11 @@
       "name": "pâtes",
       "qty": 400.0,
       "unit": "g"
+    },
+    {
+      "name": "saumon",
+      "qty": 2.0,
+      "unit": "kg"
     }
   ]
 }

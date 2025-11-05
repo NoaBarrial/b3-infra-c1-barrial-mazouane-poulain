@@ -5,6 +5,14 @@ import random
 def is_vege(recipe: Dict[str, Any]) -> bool:
     return "tags" in recipe and any(t.lower() == "vege" for t in recipe["tags"])
 
+def is_fish(recipe: Dict[str, Any]) -> bool:
+    return "tags" in recipe and any(t.lower() == "fish" for t in recipe["tags"])
+
+def is_meat(recipe: Dict[str, Any]) -> bool:
+    return "tags" in recipe and any(t.lower() == "viande" for t in recipe["tags"])
+
+
+
 def fits_time(recipe: Dict[str, Any], max_time: int | None) -> bool:
     if max_time is None:
         return True
@@ -20,6 +28,8 @@ def select_menu(
     recipes: List[Dict[str, Any]],
     days: int = 7,
     min_vege: int = 2,
+    min_fish: int = 2,
+    max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
     tolerance: float = 0.2,
@@ -29,7 +39,7 @@ def select_menu(
     Sélection simple et déterministe (via seed) :
     - Filtre par temps.
     - Tire au sort jusqu'à avoir 'days' recettes.
-    - Vérifie min_vege et budget moyen (si fourni). Réessaie quelques fois.
+    - Vérifie min_vege, min_fish, max_meat et budget moyen (si fourni). Réessaie quelques fois.
     """
     pool = [r for r in recipes if fits_time(r, max_time)]
     if seed is not None:
@@ -45,6 +55,12 @@ def select_menu(
         vege_count = sum(1 for r in cand if is_vege(r))
         if vege_count < min_vege:
             continue
+        fish_count = sum(1 for r in cand if is_fish(r))
+        if fish_count < min_fish:
+            continue
+        meat_count = sum(1 for r in cand if is_meat(r))
+        if meat_count == max_meat:
+            break
         if avg_budget is not None and not within_budget_avg(cand, avg_budget, tolerance):
             continue
         best = cand
@@ -73,13 +89,15 @@ def plan_menu(
     recipes: List[Dict[str, Any]],
     days: int = 7,
     min_vege: int = 2,
+    min_fish: int = 2,
+    max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
     tolerance: float = 0.2,
     seed: int | None = 42,
 ) -> Dict[str, Any]:
     menu = select_menu(
-        recipes, days=days, min_vege=min_vege, max_time=max_time,
+        recipes, days=days, min_vege=min_vege, min_fish=min_fish, max_meat=max_meat, max_time=max_time,
         avg_budget=avg_budget, tolerance=tolerance, seed=seed
     )
     shopping = consolidate_shopping_list(menu)

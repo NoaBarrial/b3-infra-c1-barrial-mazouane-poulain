@@ -32,5 +32,17 @@
       {"name": "poulet", "qty": 1, "unit": "kg"},
       {"name": "pommes de terre", "qty": 500, "unit": "g"}
     ]
+  },
+  {
+    "id": "r4",
+    "name": "Saumon fumé",
+    "tags": ["fish"],
+    "time_min": 20,
+    "budget_eur": 6.0,
+    "ingredients": [
+      {"name": "saumon", "qty": 1, "unit": "kg"},
+      {"name": "haricots verts", "qty": 300, "unit": "g"}
+    ]
   }
 ]
+ 

@@ -23,7 +23,7 @@ def main():
         days=args.days,
         min_vege=args.min_vege,
         min_fish=args.min_fish,
-        max_meat=args.min_meat,
+        max_meat=args.max_meat,
         max_time=args.max_time,
         avg_budget=args.avg_budget,
         tolerance=args.tolerance,
