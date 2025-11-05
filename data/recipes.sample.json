@@ -25,12 +25,12 @@
   {
     "id": "r3",
     "name": "Poulet rôti",
-    "tags": ["viande"],
+    "tags": ["meat"],
     "time_min": 60,
     "budget_eur": 4.0,
     "ingredients": [
       {"name": "poulet", "qty": 1, "unit": "kg"},
-      {"name": "pommes de terre", "qty": 500, "unit": "g"}
+      {"name": "riz", "qty": 500, "unit": "g"}
     ]
   },
   {
@@ -41,7 +41,7 @@
     "budget_eur": 6.0,
     "ingredients": [
       {"name": "saumon", "qty": 1, "unit": "kg"},
-      {"name": "haricots verts", "qty": 300, "unit": "g"}
+      {"name": "haricots verts", "qty": 200, "unit": "g"}
     ]
   }
 ]

@@ -9,7 +9,7 @@ def is_fish(recipe: Dict[str, Any]) -> bool:
     return "tags" in recipe and any(t.lower() == "fish" for t in recipe["tags"])
 
 def is_meat(recipe: Dict[str, Any]) -> bool:
-    return "tags" in recipe and any(t.lower() == "viande" for t in recipe["tags"])
+    return "tags" in recipe and any(t.lower() == "meat" for t in recipe["tags"])
 
 
 
@@ -32,6 +32,7 @@ def select_menu(
     max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
+    max_weekly_budget : int = 50,
     tolerance: float = 0.2,
     seed: int | None = 42,
 ) -> List[Dict[str, Any]]:
@@ -63,6 +64,8 @@ def select_menu(
             break
         if avg_budget is not None and not within_budget_avg(cand, avg_budget, tolerance):
             continue
+        #if max_weekly_budget < 50:
+
         best = cand
         break
     if not best:
@@ -93,12 +96,13 @@ def plan_menu(
     max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
+    max_weekly_budget : int = 50,
     tolerance: float = 0.2,
     seed: int | None = 42,
 ) -> Dict[str, Any]:
     menu = select_menu(
         recipes, days=days, min_vege=min_vege, min_fish=min_fish, max_meat=max_meat, max_time=max_time,
-        avg_budget=avg_budget, tolerance=tolerance, seed=seed
+        avg_budget=avg_budget, max_weekly_budget=max_weekly_budget, tolerance=tolerance, seed=seed
     )
     shopping = consolidate_shopping_list(menu)
     return {"days": days, "menu": menu, "shopping_list": shopping}

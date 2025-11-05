@@ -67,7 +67,7 @@
         },
         {
           "name": "haricots verts",
-          "qty": 300,
+          "qty": 200,
           "unit": "g"
         }
       ]
@@ -138,7 +138,7 @@
         },
         {
           "name": "haricots verts",
-          "qty": 300,
+          "qty": 200,
           "unit": "g"
         }
       ]
@@ -157,7 +157,7 @@
     },
     {
       "name": "haricots verts",
-      "qty": 600.0,
+      "qty": 400.0,
       "unit": "g"
     },
     {
