@@ -11,15 +11,20 @@ def is_fish(recipe: Dict[str, Any]) -> bool:
 def is_meat(recipe: Dict[str, Any]) -> bool:
     return "tags" in recipe and any(t.lower() == "meat" for t in recipe["tags"])
 
-def is_budget(recipe: Dict[str, Any]) -> bool:
-    return "budget_eur" in recipe 
-
 
 def fits_time(recipe: Dict[str, Any], max_time: int | None) -> bool:
     if max_time is None:
         return True
     return int(recipe.get("time_min", 9999)) <= max_time
 
+
+def fits_budget(recipes: List[Dict[str, Any]], max_weekly_budget: int | None) -> bool:
+    if max_weekly_budget is None:
+        return True
+    total = sum(float(r.get("budget_eur", 0.0)) for r in recipes)
+    return total <= max_weekly_budget
+
+  
 def exclude_ingredients_filter(recipes: List[Dict[str, Any]], excluded_ingredients: List[str]) -> List[Dict[str, Any]]:
     """
     Filtre les recettes contenant des ingrédients exclus (allergènes, etc.).
@@ -60,7 +65,7 @@ def select_menu(
     max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
-    max_weekly_budget : int = 10,
+    max_weekly_budget : int = 5.0,
     tolerance: float = 0.2,
     seed: int | None = 42,
     exclude_ingredients: List[str] | None = None,
@@ -71,17 +76,25 @@ def select_menu(
     - Tire au sort jusqu'à avoir 'days' recettes.
     - Vérifie min_vege, min_fish, max_meat et budget moyen (si fourni). Réessaie quelques fois.
     """
+    ##############
     pool = exclude_ingredients_filter(recipes, exclude_ingredients or [])
-    pool = [r for r in pool if fits_time(r, max_time)]
+    pool = [r for r in pool if fits_time(r, max_time)] 
     if seed is not None:
         random.seed(seed)
     attempts = 200
     best: List[Dict[str, Any]] = []
     for _ in range(attempts):
         cand = random.sample(pool, k=min(days, len(pool))) if len(pool) >= days else pool[:]
-        # Si pas assez, on complète en re-piochant (permet petit dataset)
-        while len(cand) < days and pool:
+        # Tant que le budget dépasse, on enlève un plat aléatoire
+        while not fits_budget(cand, max_weekly_budget) and len(cand) > 1:
+            cand.remove(random.choice(cand))
+        # Si pas assez, on complète en re-piochant (permet petit dataset) + en respectant le budegt max
+        while len(cand) < days and pool and fits_budget(cand, max_weekly_budget):
             cand.append(random.choice(pool))
+            while not fits_budget(cand, max_weekly_budget) and len(cand) > 1:
+                cand.remove(random.choice(cand))
+
+        
         # Contraintes
         vege_count = sum(1 for r in cand if is_vege(r))
         if vege_count < min_vege:
@@ -96,7 +109,7 @@ def select_menu(
             continue
         total_weekly_budget = sum(float(r.get("budget_eur", 0.0)) for r in cand)
         if total_weekly_budget >= max_weekly_budget:
-            break
+            continue
         best = cand
         break
     if not best:
@@ -127,7 +140,7 @@ def plan_menu(
     max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
-    max_weekly_budget : int = 50,
+    max_weekly_budget : int = 5.0,
     tolerance: float = 0.2,
     seed: int | None = 42,
     exclude_ingredients: List[str] | None = None,

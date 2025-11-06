@@ -14,9 +14,9 @@ def main():
     p.add_argument("--max-weekly-budget", type=float, default=10)
     p.add_argument("--tolerance", type=float, default=0.2)
     p.add_argument("--seed", type=int, default=42)
-    p.add_argument("--output", default=None, help="Chemin pour sauvegarder le JSON")
     p.add_argument("--exclude-ingredients", nargs="+", help="Liste d'ingrédients à exclure (ex: oeuf lait gluten).")
-
+    p.add_argument("--output", default=None, help="Chemin pour sauvegarder le JSON")
+    
     args = p.parse_args()
 
     recipes = load_recipes(args.recipes)

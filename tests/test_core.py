@@ -1,4 +1,4 @@
-from mealmaker.core import is_vege, is_fish, is_meat,  fits_time, within_budget_avg, select_menu, consolidate_shopping_list, exclude_ingredients_filter
+from mealmaker.core import is_vege, is_fish, is_meat,  fits_time, fits_budget, within_budget_avg, select_menu, consolidate_shopping_list, exclude_ingredients_filter
 
 def sample_recipes():
     return [
@@ -33,6 +33,7 @@ def test_fits_time():
     assert fits_time({"time_min": 20}, 30) is True
     assert fits_time({"time_min": 40}, 30) is False
     assert fits_time({"time_min": 40}, None) is True
+
 
 def test_within_budget_avg():
     recs = [{"budget_eur": 2.0}, {"budget_eur": 4.0}]
@@ -71,3 +72,10 @@ def test_exclude_ingredients_filter():
     assert any(r["name"] == "A" for r in filtered)
     assert any(r["name"] == "B" for r in filtered)
     assert any(r["name"] == "C" for r in filtered)
+
+def test_total_weekly_budget():
+    recs = sample_recipes()
+    # Budget total de 5 euros pour 3 jours
+    menu = select_menu(recs, days=5, max_weekly_budget=30.0, seed=1)
+    total = sum(r["budget_eur"] for r in menu)
+    assert total <= 30
