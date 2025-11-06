@@ -9,14 +9,47 @@ def is_fish(recipe: Dict[str, Any]) -> bool:
     return "tags" in recipe and any(t.lower() == "fish" for t in recipe["tags"])
 
 def is_meat(recipe: Dict[str, Any]) -> bool:
-    return "tags" in recipe and any(t.lower() == "viande" for t in recipe["tags"])
-
+    return "tags" in recipe and any(t.lower() == "meat" for t in recipe["tags"])
 
 
 def fits_time(recipe: Dict[str, Any], max_time: int | None) -> bool:
     if max_time is None:
         return True
     return int(recipe.get("time_min", 9999)) <= max_time
+
+
+def fits_budget(recipes: List[Dict[str, Any]], max_weekly_budget: int | None) -> bool:
+    if max_weekly_budget is None:
+        return True
+    total = sum(float(r.get("budget_eur", 0.0)) for r in recipes)
+    return total <= max_weekly_budget
+
+  
+def exclude_ingredients_filter(recipes: List[Dict[str, Any]], excluded_ingredients: List[str]) -> List[Dict[str, Any]]:
+    """
+    Filtre les recettes contenant des ingrédients exclus (allergènes, etc.).
+    Chaque recette doit avoir un champ 'ingredients' = liste de dicts 
+    avec au moins une clé 'name'.
+    """
+    if not excluded_ingredients:
+        return recipes
+
+    excluded_lower = [x.strip().lower() for x in excluded_ingredients]
+    filtered = []
+
+    for recipe in recipes:
+        ingredients = recipe.get("ingredients", [])
+        # On extrait les noms d’ingrédients
+        names_lower = [
+            i["name"].lower()
+            for i in ingredients
+            if isinstance(i, dict) and "name" in i
+        ]
+        # Si aucun ingrédient interdit n’est présent → on garde la recette
+        if not any(exc in names_lower for exc in excluded_lower):
+            filtered.append(recipe)
+
+    return filtered
 
 def within_budget_avg(selected: List[Dict[str, Any]], avg_target: float, tolerance: float = 0.2) -> bool:
     if not selected:
@@ -32,8 +65,10 @@ def select_menu(
     max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
+    max_weekly_budget : int = 5.0,
     tolerance: float = 0.2,
     seed: int | None = 42,
+    exclude_ingredients: List[str] | None = None,
 ) -> List[Dict[str, Any]]:
     """
     Sélection simple et déterministe (via seed) :
@@ -41,16 +76,25 @@ def select_menu(
     - Tire au sort jusqu'à avoir 'days' recettes.
     - Vérifie min_vege, min_fish, max_meat et budget moyen (si fourni). Réessaie quelques fois.
     """
-    pool = [r for r in recipes if fits_time(r, max_time)]
+    ##############
+    pool = exclude_ingredients_filter(recipes, exclude_ingredients or [])
+    pool = [r for r in pool if fits_time(r, max_time)] 
     if seed is not None:
         random.seed(seed)
     attempts = 200
     best: List[Dict[str, Any]] = []
     for _ in range(attempts):
         cand = random.sample(pool, k=min(days, len(pool))) if len(pool) >= days else pool[:]
-        # Si pas assez, on complète en re-piochant (permet petit dataset)
-        while len(cand) < days and pool:
+        # Tant que le budget dépasse, on enlève un plat aléatoire
+        while not fits_budget(cand, max_weekly_budget) and len(cand) > 1:
+            cand.remove(random.choice(cand))
+        # Si pas assez, on complète en re-piochant (permet petit dataset) + en respectant le budegt max
+        while len(cand) < days and pool and fits_budget(cand, max_weekly_budget):
             cand.append(random.choice(pool))
+            while not fits_budget(cand, max_weekly_budget) and len(cand) > 1:
+                cand.remove(random.choice(cand))
+
+        
         # Contraintes
         vege_count = sum(1 for r in cand if is_vege(r))
         if vege_count < min_vege:
@@ -62,6 +106,9 @@ def select_menu(
         if meat_count == max_meat:
             break
         if avg_budget is not None and not within_budget_avg(cand, avg_budget, tolerance):
+            continue
+        total_weekly_budget = sum(float(r.get("budget_eur", 0.0)) for r in cand)
+        if total_weekly_budget >= max_weekly_budget:
             continue
         best = cand
         break
@@ -93,12 +140,14 @@ def plan_menu(
     max_meat: int = 3,
     max_time: int | None = None,
     avg_budget: float | None = None,
+    max_weekly_budget : int = 5.0,
     tolerance: float = 0.2,
     seed: int | None = 42,
+    exclude_ingredients: List[str] | None = None,
 ) -> Dict[str, Any]:
     menu = select_menu(
         recipes, days=days, min_vege=min_vege, min_fish=min_fish, max_meat=max_meat, max_time=max_time,
-        avg_budget=avg_budget, tolerance=tolerance, seed=seed
+        avg_budget=avg_budget, max_weekly_budget=max_weekly_budget, tolerance=tolerance, seed=seed, exclude_ingredients=exclude_ingredients
     )
     shopping = consolidate_shopping_list(menu)
     return {"days": days, "menu": menu, "shopping_list": shopping}

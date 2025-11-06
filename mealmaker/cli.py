@@ -11,10 +11,12 @@ def main():
     p.add_argument("--max-meat", type=int, default=3)
     p.add_argument("--max-time", type=int, default=None)
     p.add_argument("--avg-budget", type=float, default=None)
+    p.add_argument("--max-weekly-budget", type=float, default=10)
     p.add_argument("--tolerance", type=float, default=0.2)
     p.add_argument("--seed", type=int, default=42)
+    p.add_argument("--exclude-ingredients", nargs="+", help="Liste d'ingrédients à exclure (ex: oeuf lait gluten).")
     p.add_argument("--output", default=None, help="Chemin pour sauvegarder le JSON")
-
+    
     args = p.parse_args()
 
     recipes = load_recipes(args.recipes)
@@ -26,9 +28,12 @@ def main():
         max_meat=args.max_meat,
         max_time=args.max_time,
         avg_budget=args.avg_budget,
+        max_weekly_budget=args.max_weekly_budget,
         tolerance=args.tolerance,
         seed=args.seed,
+        exclude_ingredients=args.exclude_ingredients,  # ✅ Passage de l’argument ici
     )
+
     save_json(result, args.output)
 
 if __name__ == "__main__":

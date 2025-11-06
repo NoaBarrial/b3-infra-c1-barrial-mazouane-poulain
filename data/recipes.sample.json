@@ -25,14 +25,15 @@
   {
     "id": "r3",
     "name": "Poulet rôti",
-    "tags": ["viande"],
+    "tags": ["meat"],
     "time_min": 60,
     "budget_eur": 4.0,
     "ingredients": [
       {"name": "poulet", "qty": 1, "unit": "kg"},
-      {"name": "pommes de terre", "qty": 500, "unit": "g"}
+      {"name": "riz", "qty": 500, "unit": "g"}
     ]
   },
+
   {
     "id": "r4",
     "name": "Saumon fumé",
@@ -41,8 +42,176 @@
     "budget_eur": 6.0,
     "ingredients": [
       {"name": "saumon", "qty": 1, "unit": "kg"},
-      {"name": "haricots verts", "qty": 300, "unit": "g"}
+      {"name": "haricots verts", "qty": 200, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r5",
+    "name": "Cabillau",
+    "tags": ["fish"],
+    "time_min": 10,
+    "budget_eur": 2.0,
+    "ingredients": [
+      {"name": "cabillau", "qty": 1, "unit": "kg"},
+      {"name": "brocolis", "qty": 100, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r6",
+    "name": "Blanc de poulet",
+    "tags": ["meat"],
+    "time_min": 30,
+    "budget_eur": 1.0,
+    "ingredients": [
+      {"name": "poulet", "qty": 1, "unit": "kg"},
+      {"name": "salade", "qty": 500, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r7",
+    "name": "Riz aux légumes sautés",
+    "tags": ["vege", "budget"],
+    "time_min": 20,
+    "budget_eur": 1.8,
+    "ingredients": [
+      {"name": "riz", "qty": 200, "unit": "g"},
+      {"name": "carotte", "qty": 1, "unit": "piece"},
+      {"name": "poivron", "qty": 0.5, "unit": "piece"},
+      {"name": "soja sauce", "qty": 1, "unit": "cs"}
+    ]
+  },
+  {
+    "id": "r8",
+    "name": "Soupe de lentilles corail",
+    "tags": ["vege"],
+    "time_min": 25,
+    "budget_eur": 1.6,
+    "ingredients": [
+      {"name": "lentilles corail", "qty": 150, "unit": "g"},
+      {"name": "oignon", "qty": 1, "unit": "piece"},
+      {"name": "bouillon de légumes", "qty": 500, "unit": "ml"}
+    ]
+  },
+  {
+    "id": "r9",
+    "name": "Tortillas œufs & légumes",
+    "tags": ["vege", "rapide"],
+    "time_min": 12,
+    "budget_eur": 2.2,
+    "ingredients": [
+      {"name": "tortillas", "qty": 2, "unit": "piece"},
+      {"name": "oeufs", "qty": 2, "unit": "piece"},
+      {"name": "épinards", "qty": 60, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r10",
+    "name": "Chili sin carne",
+    "tags": ["vege"],
+    "time_min": 35,
+    "budget_eur": 2.5,
+    "ingredients": [
+      {"name": "haricots rouges", "qty": 200, "unit": "g"},
+      {"name": "maïs", "qty": 80, "unit": "g"},
+      {"name": "tomates concassées", "qty": 200, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r11",
+    "name": "Poisson au four citron & herbes",
+    "tags": ["fish"],
+    "time_min": 25,
+    "budget_eur": 3.8,
+    "ingredients": [
+      {"name": "filet de poisson blanc", "qty": 300, "unit": "g"},
+      {"name": "citron", "qty": 0.5, "unit": "piece"},
+      {"name": "herbes de Provence", "qty": 1, "unit": "cc"}
+    ]
+  },
+  {
+    "id": "r12",
+    "name": "Curry de pois chiches",
+    "tags": ["vege"],
+    "time_min": 30,
+    "budget_eur": 2.0,
+    "ingredients": [
+      {"name": "pois chiches", "qty": 200, "unit": "g"},
+      {"name": "lait de coco", "qty": 200, "unit": "ml"},
+      {"name": "curry", "qty": 1, "unit": "cs"}
+    ]
+  },
+  {
+    "id": "r13",
+    "name": "Boulettes de bœuf sauce tomate",
+    "tags": ["meat"],
+    "time_min": 35,
+    "budget_eur": 4.5,
+    "ingredients": [
+      {"name": "boeuf haché", "qty": 300, "unit": "g"},
+      {"name": "chapelure", "qty": 20, "unit": "g"},
+      {"name": "sauce tomate", "qty": 200, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r14",
+    "name": "Poke bowl au thon",
+    "tags": ["fish"],
+    "time_min": 20,
+    "budget_eur": 5.2,
+    "ingredients": [
+      {"name": "riz", "qty": 200, "unit": "g"},
+      {"name": "thon", "qty": 150, "unit": "g"},
+      {"name": "avocat", "qty": 0.5, "unit": "piece"}
+    ]
+  },
+  {
+    "id": "r15",
+    "name": "Salade grecque express",
+    "tags": ["vege", "rapide", "budget"],
+    "time_min": 8,
+    "budget_eur": 1.5,
+    "ingredients": [
+      {"name": "concombre", "qty": 0.5, "unit": "piece"},
+      {"name": "tomate", "qty": 1, "unit": "piece"},
+      {"name": "feta", "qty": 60, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r16",
+    "name": "Sauté de dinde aux nouilles",
+    "tags": ["meat"],
+    "time_min": 22,
+    "budget_eur": 3.2,
+    "ingredients": [
+      {"name": "escalope de dinde", "qty": 250, "unit": "g"},
+      {"name": "nouilles", "qty": 150, "unit": "g"},
+      {"name": "sauce soja", "qty": 1, "unit": "cs"}
+    ]
+  },
+  {
+    "id": "r17",
+    "name": "Gratin de courgettes",
+    "tags": ["vege"],
+    "time_min": 40,
+    "budget_eur": 2.3,
+    "ingredients": [
+      {"name": "courgette", "qty": 350, "unit": "g"},
+      {"name": "crème", "qty": 100, "unit": "ml"},
+      {"name": "fromage râpé", "qty": 40, "unit": "g"}
+    ]
+  },
+  {
+    "id": "r18",
+    "name": "Wraps poulet & crudités",
+    "tags": ["meat", "rapide"],
+    "time_min": 12,
+    "budget_eur": 2.7,
+    "ingredients": [
+      {"name": "tortillas", "qty": 2, "unit": "piece"},
+      {"name": "poulet cuit", "qty": 150, "unit": "g"},
+      {"name": "salade", "qty": 70, "unit": "g"}
     ]
   }
+
 ]
  
